@@ -1,5 +1,6 @@
 import json
 from tweepy import OAuthHandler,Stream, StreamListener
+from datetime import datetime
 
 # login with keys
 consumer_key = ""
@@ -16,7 +17,7 @@ out = open(f"collected_tweets_{today}.txt","w")
 class MyListener(StreamListener):
 
     def on_data(self, data):
-        print(data)
+        #print(data)
         itemString = json.dumps(data)
         out.write(itemString + "\n")
         return True

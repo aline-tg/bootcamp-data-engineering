@@ -7,3 +7,6 @@ mod1/enade_project/enade2019/microdados_enade_2019/2019/1.LEIA-ME/Questionário 
 mod1/enade_project/enade2019/microdados_enade_2019/2019/2.INPUTS/R_input_enade_2019.r
 mod1/enade_project/enade2019/microdados_enade_2019/2019/2.INPUTS/Sas_input_enade_2019.sas
 mod1/enade_project/enade2019/microdados_enade_2019/2019/2.INPUTS/Spss_input_enade_2019.sps
+mod1/twitter_project/tweet.json
+mod1/twitter_project/collected_tweets_2020-11-20-16-40-37.txt
+mod1/twitter_project/.ipynb_checkpoints/tweet-checkpoint.json
