@@ -1,4 +1,4 @@
-#first DAG with airflow
+#DAG that reads external files
 
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
@@ -9,7 +9,7 @@ import pandas as pd
 # default arguments
 
 default_args = {
-    'onwer': 'Aline',
+    'owner': 'Aline',
     'depends_on_past': False,
     'start_date': datetime(2020,11,22,11),
     'email': ['alinetg@msn.com'],

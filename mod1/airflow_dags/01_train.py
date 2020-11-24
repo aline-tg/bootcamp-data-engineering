@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 # default arguments
 
 default_args = {
-    'onwer': 'Aline',
+    'owner': 'Aline',
     'depends_on_past': False,
     'start_date': datetime(2020,11,15,15),
     'email': ['alinetg@msn.com'],
