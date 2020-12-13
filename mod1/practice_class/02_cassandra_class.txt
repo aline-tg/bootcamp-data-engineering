@@ -1,0 +1,125 @@
+########Studying cassandra
+
+powershell Set-ExecutionPolicy Unrestricted
+cassandra.bat -f
+cqlsh.bat
+
+#creating keyspance 
+CREATE KEYSPACE teste
+WITH REPLICATION = {
+	'class': 'SimpleStrategy',
+	'replication_factor': 1
+};
+
+DESC KEYSPACE teste;
+
+#allow using of keyspace
+use teste;
+
+#create table on keyspace
+CREATE TABLE posts (
+	tag varchar,
+	name varchar,
+	author varchar,
+	description text,
+	likes int,
+	PRIMARY KEY (tag,name)
+);
+
+#checking table
+DESC TABLE posts;
+
+#adding values on table
+insert into teste.posts (tag,
+                         name,
+                         author, 
+                         description, 
+                         likes)
+values ('apache-cassandra', 
+ 'Cassandra post', 
+ 'Jose',
+ 'post do Cassandra', 
+ 0);
+
+#checking values added
+select * from posts;
+
+insert into teste.posts (tag,
+                         name,
+                         author, 
+                         description, 
+                         likes)
+values ('apache-cassandra', 
+ 'Cassandra post', 
+ 'Jose',
+ 'post do Cassandra', 
+ 0);
+
+insert into teste.posts (tag,
+                         name,
+                         author, 
+                         description, 
+                         likes)
+values ('apache-cassandra', 
+ 'Cassandra post2', 
+ 'Jose xxx',
+ 'post do Cassandra', 
+ 5);
+
+insert into teste.posts (tag,
+                         name,
+                         author, 
+                         description, 
+                         likes)
+values ('apache-cassandra', 
+ 'Cassandra post3', 
+ 'Jose yyy',
+ 'post do Cassandra', 
+ 6);
+
+#inserting values when there isn't yet on table
+insert into teste.posts (tag,
+                         name,
+                         author, 
+                         description, 
+                         likes)
+values ('apache-cassandra', 
+ 'Cassandra post', 
+ 'Jose',
+ 'post do Cassandra', 
+ 0)
+ IF NOT EXISTS;
+
+#updating specific row from table
+update posts set likes =2
+where tag = 'apache-cassandra' and name = 'Cassandra post'; 
+
+#when the key is not primary key, is not possible filter withou using
+#command allow filtering
+#when we add the field as primary key, it's possible filter without
+#the allow filtering command
+select * from posts where likes =2 allow filtering;
+
+#delete register from table if exists
+DELETE FROM teste.posts
+WHERE tag = 'apache-kafka' and name = 'Kafka post'
+IF EXISTS;
+
+#another option to delete
+DELETE FROM teste.posts
+WHERE tag in ('apache-kafka','Kafka post','xxx');
+
+#filtering data
+SELECT * FROM posts
+WHERE tag in ('apache-kafka','Kafka post','xxx');
+
+#creating view based in main table
+CREATE materialized view posts_by_like as
+select tag, name, author, description, likes
+from posts
+where tag is not null
+and name is not null
+and likes is not null
+PRIMARY KEY (likes,tag,name);
+
+select * from posts_by_like;
